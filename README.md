@@ -1,7 +1,7 @@
 # RyBot
 A Python-based Discord bot built on an as-needed basis for Queercraft.
 
-**Current Version: 1.0.0**
+**Current Version: 1.0.1**
 
 ## Table of Contents
 1. [General Info](#general-info)
