@@ -41,7 +41,7 @@ async def on_message(message):
             message.channel.send(no_perms)
                                 
     if message.content.startswith('.rybot purge'):
-        if message.author.id == beau_user_id, ryan_user_id:
+        if message.author.id == beau_user_id or message.author.id == ryan_user_id:
             if message.channel.id == introductions_channel_id:
                 guild = client.get_guild(queercraft_guild_id)
                 channel = client.get_channel(introductions_channel_id)
@@ -71,7 +71,7 @@ async def on_message(message):
             await message.channel.send(no_perms)
 
     if message.content.startswith('.rybot leave'):
-        if message.author.id == beau_user_id, ryan_user_id:
+        if message.author.id == beau_user_id or message.author.id == ryan_user_id:
             guild = client.get_guild(queercraft_guild_id)
             await message.channel.send('Thank you, and have a wonderful day!')
             await guild.leave()
