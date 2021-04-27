@@ -1,5 +1,5 @@
 # Invite link: https://discord.com/oauth2/authorize?client_id=835454389283192893&scope=bot&permissions=74752
-# Version 0.1.0
+# Version 1.0.1
 import discord
 intents = discord.Intents.default()
 intents.members = True
