@@ -15,7 +15,7 @@ A Python-based Discord bot built on an as-needed basis for Queercraft.
 This project is a Python-based Discord bot designed for highly targeted custom use cases for Queercraft. Its original purpose is to be able to delete all messages in a specific channel from users who are no longer members of the Discord server. It is not intended for any other purposes or communities.
 ***
 ### Thanks
-A big thank you to @aphymi for reviewing the pre-release code!
+A big thank you to [aphymi](https://github.com/aphymi) for reviewing the pre-release code!
 ***
 ### Technologies
 
