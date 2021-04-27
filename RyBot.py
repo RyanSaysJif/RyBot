@@ -7,71 +7,77 @@ max_messages = None
 
 client = discord.Client(intents=intents)
 
+#User ID constants:
+ryan_user_id = '465396405880487936'
+beau_user_id = '119659671882563584'
+
+#Guild ID constant:
+queercraft_guild_id = '119660540468396032'
+
+#Channel ID constants:
+introductions_channel_id = '545567998375624714'
+bot_wrangling_channel_id = '361087387587051520'
+
+#Error messages:
+no_perms = 'You do not have permission to use that command!'
+wrong_channel = 'You can not use that command in this channel!'
+
 @client.event
 async def on_ready():
     print('Logged in as {0.user}'.format(client))
 
 @client.event
 async def on_message(message):
-    #Stops the bot from activating itself.
     if message.author == client.user:
         return
 
-    #Can be used in bot-wrangling by Ryan to make sure the bot is responsive.
     if message.content.startswith('.rybot foo'):
-        if message.author.id == 465396405880487936:
-                if message.channel.id == 361087387587051520:
-                    await message.channel.send('bar')
-                                
-    #This  will start the process to delete all messages in the introductions channel by users who are no longer in the server.
-    if message.content.startswith('.rybot purge'):
-        #Limits the command to only user Beau or Ryan.
-        if message.author.id == 119659671882563584 or message.author.id == 465396405880487936:
-            #Limits the command to the introductions channel.
-            if message.channel.id == 545567998375624714:
-                #Stores the server.
-                guild = client.get_guild(119660540468396032)
-                #Stores the channel ID.
-                channel = client.get_channel(545567998375624714)
-                #Initiates a counter for the number of deleted messages.
-                counter = 0
-                async for message in channel.history():
-                    #Stores the user ID of the author of the current message.
-                    target = message.author.id
-                    #Stores the message ID of the current message.
-                    subject = message.id
-                    #Checks for message author user IDs that do not match the list of current guild member IDs.
-                    if guild.get_member(target) is None:
-                        counter += 1
-                        #Prints the number, userID, and messageID of each deleted message in terminal. For verification while the process is running.
-                        print(counter)
-                        print(target)
-                        print(subject)
-                        #Fetches the message ID of the currently processed message.
-                        await channel.fetch_message(subject)
-                        await message.delete()
-                #Fetches Beaupedia's user ID.
-                user = await client.fetch_user(119659671882563584)
-                #Sends Beaupedia the results once the process has finished.
-                if counter == 0:
-                    await user.send('I found no messages to delete. If you believe this was in error, please contact <@!465396405880487936> so he can fix me and we can try again. Otherwise, I will remain in your server until you type `.rybot leave`.')
-                else:
-                    await user.send(f'I found and deleted {counter} message(s) from users no longer in your server. I apologize for any spam this may have created in your audit channels.\n\nBecause my task is now complete, I have left your server. Please send any feedback to <@!465396405880487936>.\n\nThank you, and have a wonderful day!')
-                    #Leaves the guild, as this is bot is currently designed for one-time use.
-                user = await client.fetch_user(465396405880487936)
-                    await user.send(f'Found {counter} message(s) to delete.')
-                    await guild.leave()                
+        if message.author.id == ryan_user_id:
+            if message.channel.id == bot_wrangling_channel_id:
+                await message.channel.send('bar')
             else:
-                await message.channel.send('That command may not be run in this channel.')
+                await message.channel.send(wrong_channel)
         else:
-            await message.channel.send('You do not have permission to use this command.')
+            message.channel.send(no_perms)
+                                
+    if message.content.startswith('.rybot purge'):
+        if message.author.id == beau_user_id, ryan_user_id:
+            if message.channel.id == introductions_channel_id:
+                guild = client.get_guild(queercraft_guild_id)
+                channel = client.get_channel(introductions_channel_id)
+                num_deleted_messages = 0
+                async for message in channel.history():
+                    message_author_id = message.author.id
+                    queried_message_id = message.id
+                    if guild.get_member(target) is None:
+                        num_deleted_messages += 1
+                        print(num_deleted_messages)
+                        print(message_author_id)
+                        print(queried_message_id)
+                        await message.delete()
+                user = await client.fetch_user(beau_user_id)
+                if num_deleted_messages == 0:
+                    await user.send(f'I found no messages to delete. If you believe this was in error, please contact <@!{ryan_user_id}> so he can fix me and we can try again. Otherwise, I will remain in your server until you type `.rybot leave`.')
+                else:
+                    await user.send(f'I found and deleted {num_deleted_messages} message(s) from users no longer in your server. I apologize for any spam this may have created in your audit channels.\n\nBecause my task is now complete, I have left your server. Please send any feedback to <@!{ryan_user_id}>.\n\nThank you, and have a wonderful day!')
+                    await guild.leave()  
+                print('Finished purge operation.')
+                user = await client.fetch_user(ryan_user_id)
+                await user.send(f'Found {num_deleted_messages} message(s) to delete.')
+                                  
+            else:
+                await message.channel.send(wrong_channel)
+        else:
+            await message.channel.send(no_perms)
 
     if message.content.startswith('.rybot leave'):
-        if message.author.id == 119659671882563584 or message.author.id == 465396405880487936:
-            guild = client.get_guild(119660540468396032)
+        if message.author.id == beau_user_id, ryan_user_id:
+            guild = client.get_guild(queercraft_guild_id)
             await message.channel.send('Thank you, and have a wonderful day!')
             await guild.leave()
         else:
-            await message.channel.send('You do not have permission to use this command.')
+            await message.channel.send(no_perms)
 
-client.run('<Bot Token>')
+with open(BotToken.txt) as file:
+    x = file.read()
+client.run(x)
