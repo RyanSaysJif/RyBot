@@ -1,5 +1,5 @@
 # Invite link: https://discord.com/oauth2/authorize?client_id=835454389283192893&scope=bot&permissions=74752
-# Version 1.0.1
+# Version 1.1.0
 import sys
 import discord
 import datetime
