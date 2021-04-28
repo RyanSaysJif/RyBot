@@ -1,4 +1,4 @@
-# RyBot - v1.0.1
+# RyBot - v1.1.0
 A Python-based Discord bot built on an as-needed basis for Queercraft.
 
 ## Table of Contents
@@ -11,6 +11,10 @@ A Python-based Discord bot built on an as-needed basis for Queercraft.
 ### General Info
 
 This project is a Python-based Discord bot designed for highly targeted custom use cases for Queercraft. Its original purpose is to be able to delete all messages in a specific channel from users who are no longer members of the Discord server. It is not intended for any other purposes or communities.
+
+Current Functions:
+* `omnomnom`: **O**ld **M**essages **N**ow **O**bsolete **M**eaning **N**o **O**vert **M**ass - Deletes all messages in the channel sent by users no longer in the Discord server. This currently only works in Queercraft's #introductions channel.
+* `leave`: Kick the bot to the curb.
 ***
 ### Thanks
 A big thank you to [aphymi](https://github.com/aphymi) for reviewing the pre-release code!
