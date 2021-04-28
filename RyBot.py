@@ -9,14 +9,14 @@ max_messages = None
 
 client = discord.Client(intents=intents)
 
-#User ID constants:
+#User ID constants. Set these as needed.:
 dev_id = 465396405880487936
-beau_user_id = 119659671882563584
+owner_user_id = 119659671882563584
 
-#Channel ID constants:
-introductions_channel_id = 545567998375624714
-bot_wrangling_channel_id = 361087387587051520
-ryan_purgebot_test_channel_id = 835434576708894730
+#Channel ID constants. Set these as needed. Audit channel is preferably a staff-only channel.
+target_channel_id = 545567998375624714
+audit_channel_id = 361087387587051520
+test_channel_id = 835434576708894730
 
 #Error messages:
 no_perms = 'You do not have permission to use that command!'
@@ -38,15 +38,16 @@ async def on_message(message):
         return
     
     if message.content.startswith(f'{bot_prefix} foo'):
+        await message.delete(delay=5)
         if message.author.id == dev_id:
-            await message.channel.send('bar')
+            await message.channel.send('bar', delete_after=5)
         else:
             await message.channel.send(no_perms, delete_after=5)
                                 
     if message.content.startswith(f'{bot_prefix} omnomnom'):
         await message.delete()
         if message.author.id == message.guild.owner_id or message.author.id == dev_id:
-            if message.channel.id == introductions_channel_id or message.channel.id == ryan_purgebot_test_channel_id:
+            if message.channel.id == target_channel_id or message.channel.id == test_channel_id:
                 guild = message.guild.id
                 channel = message.channel
                 stdout_fileno = sys.stdout
@@ -63,7 +64,7 @@ async def on_message(message):
                         await message.delete()
                 sys.stdout.close()
                 sys.stdout = stdout_fileno
-                user = await client.fetch_user(beau_user_id)
+                user = await client.fetch_user(owner_user_id)
                 if num_deleted_messages == 0:
                     await message.guild.owner.send(f'I found no messages to delete. If you believe this was in error, please contact <@!{dev_id}> so he can fix me and we can try again. Otherwise, I will remain in your server until you type `.rybot leave`.')
                     user = await client.fetch_user(dev_id)
@@ -80,7 +81,8 @@ async def on_message(message):
             await message.channel.send(no_perms, delete_after=5)
 
     if message.content.startswith(f'{bot_prefix} leave'):
-        if message.author.id == beau_user_id or message.author.id == dev_id:
+        await message.delete(delay=5)
+        if message.author.id == owner_user_id or message.author.id == dev_id:
             await message.channel.send('Thank you, and have a wonderful day!')
             await message.guild.leave()
         else:
