@@ -1,4 +1,4 @@
-<img src="https://github.com/ASMRyan/RyBot/blob/1.1.1/icon/icon.png" align="right" alt="Bot Icon" title="Bot Icon" width="256" height="256" />
+<img src="https://github.com/ASMRyan/RyBot/blob/1.1.1/icon/icon.png" align="right" alt="RyBot v1.1.1" title="Bot Icon" width="256" height="256" />
 
 # RyBot - v1.1.1
 
