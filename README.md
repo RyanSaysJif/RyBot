@@ -23,7 +23,7 @@ This bot requires the following permissions when invited:
 * View Message History
 
 Current Functions:
-* `omnomnom`: **O**ld **M**essages **N**ow **O**bsolete **M**eaning **N**o **O**vert **M**ass - Deletes all messages in the channel sent by users no longer in the Discord server. This currently only works in Queercraft's #introductions channel.
+* `omnomnom`: **O**ld **M**essages **N**ow **O**bsolete **M**eaning **N**o **O**vert **M**ass - Deletes all messages in the channel sent by users no longer in the Discord server. Only works in the channel specified in the code file.
 * `leave`: Kick the bot to the curb.
 ***
 ### Thanks
