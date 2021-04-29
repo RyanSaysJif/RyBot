@@ -22,7 +22,7 @@ This bot requires the following permissions when invited:
 * Manage Messages
 * View Message History
 
-Default Bot Prefix: `.rybot`
+Default Command Prefix: `.rybot`
 
 Current Functions:
 * `omnomnom`: **O**ld **M**essages **N**ow **O**bsolete **M**eaning **N**o **O**vert **M**ass - Deletes all messages in the channel sent by users no longer in the Discord server. Only works in the channel specified in the code file.
