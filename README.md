@@ -1,4 +1,5 @@
 # RyBot - v1.1.1
+<img src="https://github.com/ASMRyan/RyBot/blob/1.1.1/icon/icon.png" alt="RyBot v1.1.1 Icon" width="256"/>
 A Python-based Discord bot built on an as-needed basis for Queercraft.
 
 ## Table of Contents
