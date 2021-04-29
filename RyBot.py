@@ -1,5 +1,5 @@
 # Invite link: https://discord.com/oauth2/authorize?client_id=835454389283192893&scope=bot&permissions=74752
-# Version 1.1.0
+# Version 1.1.1
 import sys
 import discord
 import datetime
@@ -53,7 +53,7 @@ async def on_message(message):
                 stdout_fileno = sys.stdout
                 sys.stdout = open('Output.log', 'a')
                 num_deleted_messages = 0
-                async for message in channel.history():
+                async for message in channel.history(oldest_first=True):
                     message_author_id = message.author.id
                     queried_message_id = message.id
                     if message.guild.get_member(message.author.id) is None:
